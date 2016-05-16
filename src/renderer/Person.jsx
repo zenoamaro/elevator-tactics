@@ -1,6 +1,6 @@
 /* @flow weak */
 import React from 'react';
-import Component from './Component';
+import Component from './controls/Component';
 import {faces} from 'bundle';
 
 

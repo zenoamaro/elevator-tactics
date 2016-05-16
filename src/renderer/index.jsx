@@ -2,26 +2,40 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import {AppContainer} from 'react-hot-loader';
+import {LookRoot, Presets, Plugins} from 'react-look';
 import Game from './Game';
 require('./index.html');
 require('./styles.css');
 
 
-export default function render() {
+const lookConfig = {
+	...Presets['react-dom'],
+	plugins: [
+		...Presets['react-dom'].plugins,
+		Plugins.friendlyClassName,
+	],
+	friendlyClassNameTemplate: (cls, Component) => (
+		`${Component.constructor.displayName}-${cls}`
+	),
+};
+
+function renderGame() {
+	const Game = require('./Game').default;
 	const $container = document.getElementById('game');
 
 	ReactDOM.render(
-		<AppContainer><Game/></AppContainer>,
+		<AppContainer>
+			<LookRoot config={lookConfig}>
+				<Game/>
+			</LookRoot>
+		</AppContainer>,
 		$container
 	);
+}
 
+export default function render() {
 	if (module.hot) {
-		const Game = require('./Game').default;
-		module.hot.accept('./Game', () => {
-			ReactDOM.render(
-				<AppContainer><Game/></AppContainer>,
-				$container
-			);
-		});
+		module.hot.accept('./Game', renderGame);
 	}
+	renderGame(Game);
 }

@@ -1,14 +1,14 @@
 /* @flow weak */
 import React from 'react';
-import map from 'lodash/map';
+import Component from './controls/Component';
+import Window from './controls/Window';
+import Layout from './controls/Layout';
+import Chart from './controls/Chart';
 import {calculateAverageWaitingTime} from 'analytics';
 import {calculatePendingRequests} from 'analytics';
 import {calculateWastedElevatorSpace} from 'analytics';
+import map from 'lodash/map';
 import {pluck} from 'utils';
-import Component from './Component';
-import Window from './Window';
-import Layout from './Layout';
-import Chart from './Chart';
 
 
 export default class AnalyticsViewer extends Component {

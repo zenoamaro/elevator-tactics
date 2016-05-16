@@ -1,10 +1,10 @@
 /* @flow weak */
 import React from 'react';
-import Component from './Component';
+import Component from './controls/Component';
 import TransitionGroup from 'react/lib/ReactCSSTransitionGroup';
+import Person from './Person';
 import map from 'lodash/map';
 import pick from 'lodash/pick';
-import Person from './Person';
 
 
 export default class Elevator extends Component {

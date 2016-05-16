@@ -8,8 +8,8 @@ import {reset} from 'game';
 import {getPresentWorld} from 'game';
 import {levels} from 'bundle';
 import strategy from 'strategy';
-import Component from './Component';
-import Timer from './Timer';
+import Component from './controls/Component';
+import Timer from './controls/Timer';
 import World from './World';
 import UI from './UI';
 

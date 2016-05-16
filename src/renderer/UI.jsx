@@ -1,18 +1,21 @@
 /* @flow weak */
 import React from 'react';
+import Look, {StyleSheet} from 'react-look';
+import Component from './controls/Component';
+import Button from './controls/Button';
+import Select from './controls/Select';
+import Label from './controls/Label';
+import EntityInspector from './EntityInspector';
+import AnalyticsViewer from './AnalyticsViewer';
+import StrategyEditor from './StrategyEditor';
 import map from 'lodash/map';
-import pick from 'lodash/pick';
 import {getCurrentTime, formatTime} from 'time';
 import {calculateAverageWaitingTime} from 'analytics';
 import {calculatePendingRequests} from 'analytics';
 import {levels} from 'bundle';
-import Component from './Component';
-import Layout from './Layout';
-import Person from './Person';
-import StrategyEditor from './StrategyEditor';
-import AnalyticsViewer from './AnalyticsViewer';
 
 
+@Look
 export default class UI extends Component {
 
 	static contextTypes = {
@@ -73,59 +76,47 @@ export default class UI extends Component {
 		const pendingRequests = calculatePendingRequests(world);
 
 		return (
-			<div className="ui">
+			<div className={UI.styles.container}>
 
-				<div className="ui-level">
-					<select className="ui-select" value={game.level} onChange={this.changeLevel}>
+				<div className={UI.styles.levelControls}>
+					<Select value={game.level} onChange={this.changeLevel}>
 						{map(levels, level => (
 							<option key={level.id} value={level.id}>{level.name}</option>
 						))}
-					</select>
+					</Select>
 
-					<button className="ui-button" onClick={this.toggleStrategyEditor}>
+					<Button onClick={this.toggleStrategyEditor}>
 						Edit strategy
-					</button>
+					</Button>
 
-					<span className="ui-button" onClick={this.toggleAnalytics}>
+					<Button onClick={this.toggleAnalytics}>
 						Waiting time: {averageWaitingTime.toFixed(2)}
-					</span>
+					</Button>
 
-					<span className="ui-button" onClick={this.toggleAnalytics}>
+					<Button onClick={this.toggleAnalytics}>
 						Pending requests: {pendingRequests}
-					</span>
+					</Button>
 				</div>
 
-				<div className="ui-controls">
-					<button className="ui-button" disabled={running} onClick={this.tick}>Tick</button>
+				<div className={UI.styles.timeControls}>
+					<Button disabled={running} onClick={this.tick}>Tick</Button>
 
-					<select className="ui-select" value={speed} onChange={this.changeSpeed}>
+					<Select value={speed} onChange={this.changeSpeed}>
 						<option value={'paused'}>Paused</option>
 						<option value={'slow'}>Slow</option>
 						<option value={'normal'}>Normal</option>
 						<option value={'fast'}>Fast</option>
-					</select>
+					</Select>
 
-					<button className="ui-button" onClick={this.reset}>Reset</button>
-					<span className="ui-button ui-time">{formatTime(time)}</span>
+					<Button onClick={this.reset}>Reset</Button>
+					<Label>{formatTime(time)}</Label>
 				</div>
 
-				{inspectedEntity && inspectedEntity.data && (
-					<div className="ui-inspector">
-						<div><strong>{inspectedEntity.type}</strong></div>
-						<pre className="ui-codearea">
-							{JSON.stringify(inspectedEntity.data, null, 2).slice(1, -1)}
-						</pre>
-						{inspectedEntity.type === 'person' && (
-							<Person person={inspectedEntity.data} floors={floors}/>
-						)}
-						{inspectedEntity.type === 'elevator' && (
-							<Layout dir="horizontal" justify="start">
-								{map(pick(people, elevator.people), person => (
-									<Person key={person.id} person={person} floors={floors}/>
-								))}
-							</Layout>
-						)}
-					</div>
+				{inspectedEntity && (
+					<EntityInspector
+						entity={inspectedEntity}
+						world={world}
+					/>
 				)}
 
 				{this.state.editingStrategy && (
@@ -145,4 +136,28 @@ export default class UI extends Component {
 			</div>
 		);
 	}
+
+	static styles = StyleSheet.create({
+		container: {
+			position: 'absolute',
+			top: 0, left: 0,
+			right: 0, bottom: 0,
+			pointerEvents: 'none',
+		},
+		levelControls: {
+			position: 'absolute',
+			left: 32,
+			top: 32,
+			display: 'flex',
+			flexDirection: 'row',
+		},
+		timeControls: {
+			position: 'absolute',
+			right: 32,
+			top: 32,
+			display: 'flex',
+			flexDirection: 'row',
+		},
+	});
+
 }

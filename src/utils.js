@@ -60,3 +60,9 @@ export function copy(collection) {
 export function avg(arr) {
 	return sum(arr) / arr.length;
 }
+
+export function prettyJson(obj) {
+	return JSON.stringify(obj, null, 2)
+		.replace(/^(\{\n|\}$| {2})/mg, '')
+		.replace(/("|,$)/mg, '');
+}

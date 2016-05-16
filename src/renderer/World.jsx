@@ -1,9 +1,9 @@
 /* @flow weak */
 import React from 'react';
-import Component from './Component';
 import ReactDOM from 'react-dom';
-import Floors from './Floors';
+import Component from './controls/Component';
 import ElevatorShaft from './ElevatorShaft';
+import Floors from './Floors';
 import {getTimeOfDay, getCurrentTime} from 'time';
 
 

@@ -1,6 +1,7 @@
 /* @flow weak */
 import React from 'react';
 import ReactDOM from 'react-dom';
+import Look, {StyleSheet} from 'react-look';
 import Component from './Component';
 import map from 'lodash/map';
 import takeRight from 'lodash/takeRight';
@@ -8,7 +9,8 @@ import max from 'lodash/max';
 import {avg} from 'utils';
 
 
-export default class Window extends Component {
+@Look
+export default class Chart extends Component {
 
 	static propTypes = {
 		style: React.PropTypes.object,
@@ -56,16 +58,31 @@ export default class Window extends Component {
 		}, done);
 	}
 
+	render() {
+		return (
+			<div className={Chart.styles.style} style={this.props.style}>
+				<div className={Chart.styles.title}>
+					{this.props.title}
+				</div>
+				<div className={Chart.styles.content} ref="area">
+					{this.renderGuide(this.state.avgValue)}
+					{this.renderGuide(this.state.maxValue)}
+					{this.renderDataPoints(this.state.values)}
+				</div>
+			</div>
+		);
+	}
+
 	renderDataPoints(values) {
 		if (!values || !values.length) {
 			return false;
 		}
 		const {dataPointWidth, avgValue, scaledHeight} = this.state;
 		return map(values, (value, i) => (
-			<div key={i} className="ui-chart-datapoint" style={{
+			<div key={i} className={Chart.styles.datapoint} style={{
 				width: dataPointWidth,
 				height: (value * scaledHeight) || 0,
-				background: value < avgValue? '#0000AA' : '#5555FF',
+				backgroundColor: value < avgValue? '#0000AA' : '#5555FF',
 			}}/>
 		));
 	}
@@ -78,25 +95,38 @@ export default class Window extends Component {
 			top: this.state.height - value * this.state.scaledHeight,
 		};
 		return (
-			<div className="ui-chart-guide" style={style}>
+			<div className={Chart.styles.guide} style={style}>
 				{value.toFixed(2)}
 			</div>
 		);
 	}
 
-	render() {
-		return (
-			<div className="ui-chart" style={this.props.style}>
-				<div className="ui-chart-title">
-					{this.props.title}
-				</div>
-				<div className="ui-chart-content" ref="area">
-					{this.renderGuide(this.state.avgValue)}
-					{this.renderGuide(this.state.maxValue)}
-					{this.renderDataPoints(this.state.values)}
-				</div>
-			</div>
-		);
-	}
+	static styles = StyleSheet.create({
+		chart: {},
+		content: {
+			position: 'relative',
+			display: 'flex',
+			flexDirection: 'row',
+			alignItems: 'flex-end',
+			justifyContent: 'flex-end',
+			height: 100,
+		},
+		title: {
+			fontWeight: 'bold',
+			marginBottom: 8,
+		},
+		datapoint: {
+			background: '#0000AA',
+			borderRight: 'solid thin white',
+		},
+		guide: {
+			position: 'absolute',
+			left: 0, right: 0,
+			fontSize: '.85rem',
+			color: '#AAAAAA',
+			textShadow: '0 0 1px white',
+			borderTop: 'solid 2px #AAAAAA',
+		},
+	});
 
 }

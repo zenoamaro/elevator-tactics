@@ -1,13 +1,13 @@
 /* @flow weak */
 import React from 'react';
-import Component from './Component';
+import Component from './controls/Component';
 import TransitionGroup from 'react/lib/ReactCSSTransitionGroup';
+import Person from './Person';
 import map from 'lodash/map';
 import pick from 'lodash/pick';
 import size from 'lodash/size';
 import reverse from 'lodash/reverse';
 import sortBy from 'lodash/sortBy';
-import Person from './Person';
 
 
 export default class Floor extends Component {
