@@ -28,28 +28,28 @@ export default class Chart extends Component {
 
 	componentDidMount() {
 		this.calculateSize(() => {
-			this.calculateScale();
+			this.calculateScale(this.props.values);
 		});
 	}
 
 	componentWillReceiveProps(nextProps) {
 		if (this.props.values !== nextProps.values) {
-			this.calculateScale();
+			this.calculateScale(nextProps.values);
 		}
 	}
 
 	calculateSize(done) {
 		const $area = ReactDOM.findDOMNode(this.refs.area);
-		const {subdivisions} = this.props;
+		const subdivisions = this.props.subdivisions || 1;
 		const {width, height} = $area.getBoundingClientRect();
 		const dataPointWidth = width / subdivisions;
 		this.setState({width, height, dataPointWidth}, done);
 	}
 
-	calculateScale(done) {
-		const {values, subdivisions} = this.props;
+	calculateScale(values, done) {
+		const {subdivisions} = this.props;
 		const valuesSlice = takeRight(values, subdivisions);
-		const maxValue = max(valuesSlice);
+		const maxValue = max(valuesSlice) || 1;
 		const avgValue = avg(valuesSlice);
 		const scaledHeight = this.state.height / maxValue;
 		this.setState({

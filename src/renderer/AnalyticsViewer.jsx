@@ -8,7 +8,6 @@ import {calculateAverageWaitingTime} from 'analytics';
 import {calculatePendingRequests} from 'analytics';
 import {calculateWastedElevatorSpace} from 'analytics';
 import map from 'lodash/map';
-import {pluck} from 'utils';
 
 
 export default class AnalyticsViewer extends Component {
@@ -32,11 +31,9 @@ export default class AnalyticsViewer extends Component {
 
 		return (
 			<Window>
-				<Layout width="100%" height="100%" align="stretch" justify="start">
-					<Chart title="Pending requests" values={pendingRequests} margin={16}/>
-					<Chart title="Wasted elevator space" values={wastedElevatorSpace} margin={16}/>
-					<Chart title="Average waiting time" values={averageWaitingTime} margin={16}/>
-				</Layout>
+				<Chart title="Pending requests" values={pendingRequests}/>
+				<Chart title="Wasted elevator space" values={wastedElevatorSpace}/>
+				<Chart title="Average waiting time" values={averageWaitingTime}/>
 			</Window>
 		);
 	}
