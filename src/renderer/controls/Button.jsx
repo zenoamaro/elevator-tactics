@@ -11,18 +11,24 @@ export default class Button extends Component {
 		children: React.PropTypes.node,
 		disabled: React.PropTypes.bool,
 		onClick: React.PropTypes.func,
+		pressed: React.PropTypes.bool,
 		style: React.PropTypes.object,
+		title: React.PropTypes.string,
+		value: React.PropTypes.string,
 	};
 
 	static defaultProps = {
 		disabled: false,
+		pressed: false,
 	};
 
 	render() {
 		return (
 			<button className={Button.styles.button}
 				onClick={this.props.onClick}
-				styles={this.props.style}>
+				styles={this.props.style}
+				title={this.props.title}
+				value={this.props.value}>
 				{this.props.children}
 			</button>
 		);
@@ -45,6 +51,10 @@ export default class Button extends Component {
 			pointerEvents: 'auto',
 			'disabled=false': {
 				':active': {
+					boxShadow: 'none',
+					transform: 'translate(2px, 2px)',
+				},
+				'pressed=true': {
 					boxShadow: 'none',
 					transform: 'translate(2px, 2px)',
 				},

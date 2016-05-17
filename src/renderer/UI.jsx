@@ -3,6 +3,7 @@ import React from 'react';
 import Look, {StyleSheet} from 'react-look';
 import Component from './controls/Component';
 import Button from './controls/Button';
+import SegmentedButton from './controls/SegmentedButton';
 import Select from './controls/Select';
 import Label from './controls/Label';
 import EntityInspector from './EntityInspector';
@@ -86,30 +87,39 @@ export default class UI extends Component {
 					</Select>
 
 					<Button onClick={this.toggleStrategyEditor}>
-						Edit strategy
+						✏️ Edit strategy
 					</Button>
 
-					<Button onClick={this.toggleAnalytics}>
-						Waiting time: {averageWaitingTime.toFixed(2)}
+					<Button
+						onClick={this.toggleAnalytics}
+						title="Click to display analytics">
+						⌛️ Waiting time: {averageWaitingTime.toFixed(2)}
 					</Button>
 
-					<Button onClick={this.toggleAnalytics}>
-						Pending requests: {pendingRequests}
+					<Button
+						onClick={this.toggleAnalytics}
+						title="Click to display analytics">
+						🔔 Pending requests: {pendingRequests}
 					</Button>
 				</div>
 
 				<div className={UI.styles.timeControls}>
-					<Button disabled={running} onClick={this.tick}>Tick</Button>
+					<Button
+						disabled={running}
+						onClick={this.tick}
+						title="Step by one tick">
+						▶︎❙
+					</Button>
 
-					<Select value={speed} onChange={this.changeSpeed}>
-						<option value={'paused'}>Paused</option>
-						<option value={'slow'}>Slow</option>
-						<option value={'normal'}>Normal</option>
-						<option value={'fast'}>Fast</option>
-					</Select>
+					<SegmentedButton value={speed} onChange={this.changeSpeed}>
+						<option title="Paused" value="paused">❚❚</option>
+						<option title="Slow speed" value="slow">▷</option>
+						<option title="Normal speed" value="normal">▶︎</option>
+						<option title="Fast speed" value="fast">▶︎▶︎</option>
+					</SegmentedButton>
 
-					<Button onClick={this.reset}>Reset</Button>
-					<Label>{formatTime(time)}</Label>
+					<Button onClick={this.reset}>✖️ Reset</Button>
+					<Label>🕓 {formatTime(time)}</Label>
 				</div>
 
 				{inspectedEntity && (
