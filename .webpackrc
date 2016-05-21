@@ -25,7 +25,7 @@ module.exports = {
 
 	resolve: {
 		extensions: [ '.js', '.jsx', '.json' ],
-		modules: [ 'src', 'node_modules' ],
+		modules: [ 'node_modules', d('./src') ],
 	},
 
 	module: {
@@ -48,6 +48,11 @@ module.exports = {
 			test: /\.jsx?$/,
 			include: d('src'),
 			loaders: ['babel'],
+		}, {
+			test: /\.css$/,
+			loaders: ['file'],
+			include: d('node_modules/codemirror'),
+			query: { name:'[name].[ext]?[hash:10]' },
 		}]
 	},
 
