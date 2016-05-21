@@ -28,7 +28,7 @@ export default class Window extends Component {
 	render() {
 		return (
 			<div className={Window.styles.window}>
-				<Panel>
+				<Panel scrolling>
 					{this.props.children}
 				</Panel>
 			</div>

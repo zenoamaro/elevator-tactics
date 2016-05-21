@@ -9,6 +9,7 @@ export default class Panel extends Component {
 
 	static propTypes = {
 		children: React.PropTypes.node,
+		scrolling: React.PropTypes.bool,
 	};
 
 	render() {
@@ -32,6 +33,9 @@ export default class Panel extends Component {
 			background: 'white',
 			boxShadow: '2px 2px 0 black',
 			overflow: 'hidden',
+			'scrolling=true': {
+				overflowY: 'scroll',
+			},
 		},
 	});
 
