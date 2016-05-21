@@ -24,3 +24,7 @@ export function calculateWastedElevatorSpace(world) {
 	const elevatorSpace = getElevatorSpace(world.elevator);
 	return min([pendingRequests, elevatorSpace]);
 }
+
+export function calculateWastedElevatorStops(world) {
+	return world.elevator.action === 'open' && !getElevatorSpace(world.elevator)? 1 : 0;
+}
