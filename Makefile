@@ -37,7 +37,7 @@ lint:
 compile:
 	@$(COMPILE) -q -d lib src
 
-build:
+build: clean
 	@$(PRODUCTION) $(BUILD) --config .webpackrc
 
 test:

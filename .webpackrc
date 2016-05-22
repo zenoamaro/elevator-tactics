@@ -30,29 +30,28 @@ module.exports = {
 
 	module: {
 		loaders: [{
-			test: /\.json$/,
-			loaders: ['json'],
-		}, {
-			test: /\.(html|css|jpg|png|svg|pdf)$/,
-			include: d('src/renderer'),
-			loaders: ['file'],
-			query: { context:'./src/renderer',
-							 name:'[path][name].[ext]?[hash:10]' },
-		}, {
-			test: /\.(html|css|jpg|png|svg|pdf)$/,
-			include: d('src/bundle'),
-			loaders: ['file'],
-			query: { context:'./src/bundle',
-							 name:'[path][name].[ext]?[hash:10]' },
-		}, {
 			test: /\.jsx?$/,
 			include: d('src'),
 			loaders: ['babel'],
 		}, {
+			test: /\.json$/,
+			loaders: ['json'],
+		}, {
+			test: /\.(html|css|png|ttf)$/,
+			include: d('src/renderer'),
+			loaders: [
+				'file?context=./src/renderer&name=[name].[ext]?[hash:10]',
+			],
+		}, {
+			test: /\.(html|css|ttf|png)$/,
+			include: d('src/bundle'),
+			loaders: [
+				'file?context=./src/bundle&name=[path][name].[ext]?[hash:10]',
+			],
+		}, {
 			test: /\.css$/,
-			loaders: ['file'],
 			include: d('node_modules/codemirror'),
-			query: { name:'[name].[ext]?[hash:10]' },
+			loaders: ['file?name=[name].[ext]?[hash:10]'],
 		}]
 	},
 
