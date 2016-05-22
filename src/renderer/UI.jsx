@@ -54,17 +54,21 @@ export default class UI extends Component {
 		this.setState({editingStrategy, viewingAnalytics:false});
 	};
 
-	changeStrategy = (strategy) => {
+	closeStrategyEditor = () => {
 		this.setState({editingStrategy:false});
+	};
+
+	changeStrategy = (strategy) => {
+		this.closeStrategyEditor();
 		this.context.changeStrategy(strategy);
 	};
 
-	toggleAnalytics = () => {
+	toggleAnalyticsViewer = () => {
 		const viewingAnalytics = !this.state.viewingAnalytics;
 		this.setState({viewingAnalytics, editingStrategy:false});
 	};
 
-	closeAnalytics = () => {
+	closeAnalyticsViewer = () => {
 		this.setState({viewingAnalytics:false});
 	};
 
@@ -91,13 +95,13 @@ export default class UI extends Component {
 					</Button>
 
 					<Button
-						onClick={this.toggleAnalytics}
+						onClick={this.toggleAnalyticsViewer}
 						title="Click to display analytics">
 						⌛️ Waiting time: {averageWaitingTime.toFixed(2)}
 					</Button>
 
 					<Button
-						onClick={this.toggleAnalytics}
+						onClick={this.toggleAnalyticsViewer}
 						title="Click to display analytics">
 						🔔 Pending requests: {pendingRequests}
 					</Button>
@@ -133,13 +137,14 @@ export default class UI extends Component {
 					<StrategyEditor
 						strategy={this.props.strategy}
 						onSubmit={this.changeStrategy}
+						onClose={this.closeStrategyEditor}
 					/>
 				)}
 
 				{this.state.viewingAnalytics && (
 					<AnalyticsViewer
 						game={game}
-						onClose={this.closeAnalytics}
+						onClose={this.closeAnalyticsViewer}
 					/>
 				)}
 

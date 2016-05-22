@@ -2,7 +2,6 @@
 import React from 'react';
 import Component from './controls/Component';
 import Window from './controls/Window';
-import Layout from './controls/Layout';
 import Button from './controls/Button';
 import CodeEditor from './controls/CodeEditor';
 
@@ -10,6 +9,7 @@ import CodeEditor from './controls/CodeEditor';
 export default class StrategyEditor extends Component {
 
 	static propTypes = {
+		onClose: React.PropTypes.func,
 		onSubmit: React.PropTypes.func,
 		strategy: React.PropTypes.string,
 	};
@@ -33,7 +33,9 @@ export default class StrategyEditor extends Component {
 
 	render() {
 		return (
-			<Window>
+			<Window
+				title="Edit strategy"
+				onClose={this.props.onClose}>
 				<CodeEditor
 					value={this.state.strategy}
 					onChange={this.change}

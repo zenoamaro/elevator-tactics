@@ -31,7 +31,9 @@ export default class AnalyticsViewer extends Component {
 		const wastedElevatorStops = map(history, calculateWastedElevatorStops);
 
 		return (
-			<Window>
+			<Window
+				title="Analytics"
+				onClose={this.props.onClose}>
 				<Chart title="Pending requests" values={pendingRequests}/>
 				<Chart title="Average waiting time" values={averageWaitingTime}/>
 				<Chart title="Wasted elevator space" values={wastedElevatorSpace}/>

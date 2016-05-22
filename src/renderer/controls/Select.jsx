@@ -2,6 +2,7 @@
 import React from 'react';
 import Look, {StyleSheet} from 'react-look';
 import Component from './Component';
+import SelectArrow from './SelectArrow.png';
 
 
 @Look
@@ -24,7 +25,7 @@ export default class Select extends Component {
 			fontFamily: 'inherit',
 			lineHeight: '1',
 			background: 'white 91% 55%/10px 6px no-repeat',
-			backgroundImage: 'url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAMAQAAAABKd6BWAAAAFklEQVR4AWPg/8+Agj98+ICC//OjYAD3Nxdx2FzkmwAAAABJRU5ErkJggg==)',
+			backgroundImage: `url(${SelectArrow})`,
 			border: 'solid 2px black',
 			borderRadius: '0',
 			boxShadow: '2px 2px 0 black',

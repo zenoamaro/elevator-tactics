@@ -6,6 +6,7 @@ import {LookRoot, Presets, Plugins} from 'react-look';
 import Game from './Game';
 require('./index.html');
 require('./styles.css');
+require('./chicago.ttf');
 
 
 const lookConfig = {

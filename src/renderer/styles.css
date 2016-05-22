@@ -17,6 +17,11 @@
 15---bright-white----#FFFFFF
 */
 
+@font-face {
+	font-family: 'Chicago';
+	src: url('chicago.ttf')	format('truetype');
+}
+
 * {
 	box-sizing: border-box;
 	cursor: default;
@@ -24,7 +29,7 @@
 
 html {
 	font-size: 13px;
-	font-family: -apple-system, sans-serif;
+	font-family: chicago, -apple-system, sans-serif;
 	-webkit-user-select: none;
 	font-weight: 400;
 }
