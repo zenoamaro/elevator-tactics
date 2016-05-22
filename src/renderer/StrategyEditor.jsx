@@ -26,8 +26,7 @@ export default class StrategyEditor extends Component {
 		this.setState({strategy});
 	}
 
-	change = (event) => {
-		const strategy = event.target.value;
+	change = (strategy) => {
 		this.setState({strategy});
 	};
 
