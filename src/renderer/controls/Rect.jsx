@@ -45,7 +45,16 @@ export default class Rect extends Component {
 				pointerEvents: 'auto',
 			},
 			'appearance=transparent': {
-
+				'active=true': {
+					color: 'white',
+					background: 'black',
+				},
+				'interactive=true': {
+					':active': {
+						color: 'white',
+						background: 'black',
+					},
+				},
 			},
 			'appearance=flat': {
 				border: 'solid 2px currentColor',

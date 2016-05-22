@@ -18,10 +18,14 @@ export default function elevatorSystem(world) {
 	return {elevator};
 }
 
+const defaultStrategy = `
+	return { action: 'sleep' };
+`;
+
 function compileStrategy(strategy) {
 	/* eslint-disable no-new-func */
 	return Function('elevator', 'state',
-		strategy
+		strategy || defaultStrategy
 	);
 	/* eslint-enable no-new-func */
 }

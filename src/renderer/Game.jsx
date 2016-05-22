@@ -18,7 +18,7 @@ import UI from './UI';
 export default class Game extends Component {
 
 	state = {
-		strategy: strategy,
+		strategy: '', // strategy,
 		speed: 'paused',
 	};
 

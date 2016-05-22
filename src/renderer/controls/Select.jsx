@@ -14,6 +14,7 @@ export default class Select extends Component {
 		children: React.PropTypes.node,
 		disabled: React.PropTypes.bool,
 		onChange: React.PropTypes.func,
+		placeholder: React.PropTypes.string,
 		value: React.PropTypes.any,
 	};
 
@@ -30,13 +31,14 @@ export default class Select extends Component {
 
 	getSelectedOption() {
 		const children = React.Children.toArray(this.props.children);
-		const selected = children.find(o => o.props.value === this.props.value);
-		return selected || children[0];
+		return children.find(o => o.props.value === this.props.value);
 	}
 
 	render() {
 		const selectedOption = this.getSelectedOption();
-		const content = selectedOption && selectedOption.props.children;
+		const content = selectedOption
+			? selectedOption.props.children
+			: this.props.placeholder;
 
 		return (
 			<div className={Select.styles.container} onClick={this.onClick}>
