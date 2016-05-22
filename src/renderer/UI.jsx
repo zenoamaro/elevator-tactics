@@ -19,12 +19,17 @@ import {levels} from 'bundle';
 @Look
 export default class UI extends Component {
 
+	static propTypes = {
+		snapshot: React.PropTypes.object,
+		strategy: React.PropTypes.string,
+	};
+
 	static contextTypes = {
-		tick: React.PropTypes.func.isRequired,
-		reset: React.PropTypes.func.isRequired,
 		changeLevel: React.PropTypes.func.isRequired,
 		changeSpeed: React.PropTypes.func.isRequired,
 		changeStrategy: React.PropTypes.func.isRequired,
+		tick: React.PropTypes.func.isRequired,
+		reset: React.PropTypes.func.isRequired,
 	};
 
 	state = {
@@ -136,6 +141,7 @@ export default class UI extends Component {
 				{this.state.editingStrategy && (
 					<StrategyEditor
 						strategy={this.props.strategy}
+						snapshot={this.props.snapshot}
 						onSubmit={this.changeStrategy}
 						onClose={this.closeStrategyEditor}
 					/>

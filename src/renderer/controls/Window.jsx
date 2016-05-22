@@ -93,7 +93,7 @@ export default class Window extends Component {
 			outline: 'solid 2px white',
 		},
 		content: {
-			flex: 1,
+			flex: '1 1 0',
 			display: 'flex',
 			flexDirection: 'column',
 			overflow: 'hidden',

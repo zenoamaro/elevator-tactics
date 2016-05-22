@@ -32,7 +32,7 @@ export default class Panel extends Component {
 		panel: {
 			display: 'flex',
 			flexDirection: 'column',
-			flex: 1,
+			flex: '1 1 0',
 			alignSelf: 'stretch',
 			padding: '16px',
 			overflow: 'hidden',

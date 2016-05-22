@@ -6,6 +6,7 @@ import createGame from 'game';
 import {tick} from 'game';
 import {reset} from 'game';
 import {getPresentWorld} from 'game';
+import {makeUserSnapshot} from 'game';
 import {levels} from 'bundle';
 import strategy from 'strategy';
 import Component from './controls/Component';
@@ -119,7 +120,7 @@ export default class Game extends Component {
 				<Timer running={running} speed={speed} onTick={this.tick}/>
 				<World world={world}/>
 				<UI game={game} world={world} running={running} speed={speed}
-					strategy={this.state.strategy}
+					strategy={this.state.strategy} snapshot={makeUserSnapshot(world)}
 					inspectedEntity={inspectedEntityDescriptor}/>
 			</div>
 		);

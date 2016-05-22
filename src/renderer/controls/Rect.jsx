@@ -1,4 +1,4 @@
-/* @flow weak */
+	/* @flow weak */
 import React from 'react';
 import Look, {StyleSheet} from 'react-look';
 import Component from './Component';
@@ -38,7 +38,7 @@ export default class Rect extends Component {
 			alignItems: 'inherit',
 			justifyContent: 'inherit',
 			alignSelf: 'stretch',
-			flex: 1,
+			flex: '1 1 0',
 			lineHeight: '1',
 			pointerEvents: 'none',
 			'interactive=true': {
@@ -66,6 +66,7 @@ export default class Rect extends Component {
 				border: 'solid 2px currentColor',
 				boxShadow: '2px 2px 0 currentColor',
 				transform: 'translate(-2px, -2px)',
+				zIndex: 2,
 				'active=true': {
 					boxShadow: 'none',
 					transform: 'translate(0, 0)',

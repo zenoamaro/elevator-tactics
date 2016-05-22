@@ -46,6 +46,7 @@ export default class Button extends Component {
 
 	static styles = StyleSheet.create({
 		button: {
+			flex: '0 0 auto',
 			margin: 0,
 			padding: 0,
 			color: 'inherit',

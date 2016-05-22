@@ -29,9 +29,21 @@ export default class CodeEditor extends Component {
 		};
 	}
 
+	componentDidMount() {
+		this.recalculateSize();
+	}
+
+	recalculateSize() {
+		const {height} = this.$editor.getBoundingClientRect();
+		const codemirror = this.$editor.querySelector('.CodeMirror');
+		codemirror.style.height = `${height}px`;
+	}
+
 	render() {
 		return (
-			<div className={CodeEditor.styles.editor}>
+			<div
+				className={CodeEditor.styles.editor}
+				ref={$ => this.$editor = $}>
 				<Codemirror
 					onChange={this.props.onChange}
 					value={this.props.value}
@@ -43,7 +55,8 @@ export default class CodeEditor extends Component {
 
 	static styles = StyleSheet.create({
 		editor: {
-			flex: 1,
+			display: 'flex',
+			flex: '1 1 0',
 			alignSelf: 'stretch',
 			pointerEvents: 'auto',
 		},

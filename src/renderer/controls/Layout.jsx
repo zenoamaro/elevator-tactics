@@ -18,7 +18,7 @@ export default class Layout extends Component {
 		]),
 		flex: React.PropTypes.oneOfType([
 			React.PropTypes.number,
-			React.PropTypes.oneOf(['auto']),
+			React.PropTypes.string,
 		]),
 		justify: React.PropTypes.oneOf([
 			'start', 'center', 'end',
@@ -27,15 +27,25 @@ export default class Layout extends Component {
 	};
 
 	static defaultProps = {
-		flex: 1,
+		flex: '1 1 0',
 		dir: 'vertical',
 		align: 'stretch',
 		justify: 'between',
 	};
 
+	render() {
+		return (
+			<div className={Layout.styles.layout}>
+				{this.props.children}
+			</div>
+		);
+	}
+
 	static styles = StyleSheet.create({
 		layout: {
 			display: 'flex',
+			alignSelf: 'stretch',
+			flex: (props) => props.flex,
 			'dir=horizontal': {flexDirection: 'row'},
 			'dir=vertical': {flexDirection:'column'},
 			'align=start': {alignItems:'flex-start'},
@@ -49,13 +59,5 @@ export default class Layout extends Component {
 			'justify=between': {justifyContent:'flex-between'},
 		},
 	})
-
-	render() {
-		return (
-			<div className={Layout.styles.layout}>
-				{this.props.children}
-			</div>
-		);
-	}
 
 }
