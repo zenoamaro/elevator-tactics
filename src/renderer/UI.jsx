@@ -40,12 +40,12 @@ export default class UI extends Component {
 	};
 
 	changeLevel = (event) => {
-		const level = event.target.value;
+		const level = event.currentTarget.value;
 		this.context.changeLevel(level);
 	};
 
 	changeSpeed = (event) => {
-		const speed = event.target.value;
+		const speed = event.currentTarget.value;
 		this.context.changeSpeed(speed);
 	};
 

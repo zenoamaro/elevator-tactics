@@ -2,31 +2,33 @@
 import React from 'react';
 import Look, {StyleSheet} from 'react-look';
 import Component from './Component';
+import Rect from './Rect';
 
 
-@Look
 export default class Label extends Component {
 
 	static propTypes = {
+		appearance: React.PropTypes.string,
 		children: React.PropTypes.node,
+	};
+
+	static defaultProps = {
+		appearance: 'flat',
 	};
 
 	render() {
 		return (
-			<div className={Label.styles.label}>
-				{this.props.children}
-			</div>
+			<Rect appearance={this.props.appearance}>
+				<div className={Label.styles.content}>
+					{this.props.children}
+				</div>
+			</Rect>
 		);
 	}
 
 	static styles = StyleSheet.create({
-		label: {
+		content: {
 			padding: '6px 10px',
-			color: 'black',
-			lineHeight: '1',
-			border: 'solid 2px black',
-			background: 'white',
-			boxShadow: '2px 2px 0 black',
 		},
 	});
 

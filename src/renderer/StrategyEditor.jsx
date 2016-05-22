@@ -1,9 +1,11 @@
 /* @flow weak */
 import React from 'react';
 import Component from './controls/Component';
-import Window from './controls/Window';
 import Button from './controls/Button';
+import Select from './controls/Select';
 import CodeEditor from './controls/CodeEditor';
+import Toolbar from './controls/Toolbar';
+import Window from './controls/Window';
 
 
 export default class StrategyEditor extends Component {
@@ -33,13 +35,18 @@ export default class StrategyEditor extends Component {
 
 	render() {
 		return (
-			<Window
-				title="Edit strategy"
-				onClose={this.props.onClose}>
+			<Window title="Edit strategy" onClose={this.props.onClose}>
+				<Toolbar>
+					<Select appearance="transparent">
+						<option>Load saved strategy</option>
+					</Select>
+				</Toolbar>
+
 				<CodeEditor
 					value={this.state.strategy}
 					onChange={this.change}
 				/>
+
 				<Button onClick={this.submit}>
 					Save
 				</Button>

@@ -2,6 +2,7 @@
 import React from 'react';
 import Look, {StyleSheet} from 'react-look';
 import Component from './Component';
+import Rect from './Rect';
 import SelectArrow from './SelectArrow.png';
 
 
@@ -9,51 +10,73 @@ import SelectArrow from './SelectArrow.png';
 export default class Select extends Component {
 
 	static propTypes = {
+		appearance: React.PropTypes.string,
 		children: React.PropTypes.node,
 		disabled: React.PropTypes.bool,
 		onChange: React.PropTypes.func,
 		value: React.PropTypes.any,
 	};
 
-	static styles = StyleSheet.create({
-		select: {
-			margin: '0',
-			padding: '6px 28px 6px 10px',
-			color: 'black',
-			fontSize: 'inherit',
-			fontWeight: 'inherit',
-			fontFamily: 'inherit',
-			lineHeight: '1',
-			background: 'white 91% 55%/10px 6px no-repeat',
-			backgroundImage: `url(${SelectArrow})`,
-			border: 'solid 2px black',
-			borderRadius: '0',
-			boxShadow: '2px 2px 0 black',
-			cursor: 'auto',
-			appearance: 'none',
-			pointerEvents: 'auto',
-			'disabled=false': {
-				':active': {
-					boxShadow: 'none',
-					transform: 'translate(2px, 2px)',
-				},
-			},
-			'disabled=true': {
-				color: '#555555',
-				borderColor: '#555555',
-				boxShadow: '2px 2px 0 #555555',
-				pointerEvents: 'none',
-			},
-		},
-	});
+	static defaultProps = {
+		appearance: 'raised',
+		disabled: false,
+	};
 
-	render() {
-		return (
-			<select className={Select.styles.select}
-				value={this.props.value} onChange={this.props.onChange}>
-				{this.props.children}
-			</select>
+	onClick = () => {
+		this.$select.dispatchEvent(
+			new MouseEvent('mousedown')
 		);
 	}
+
+	getSelectedOption() {
+		const children = React.Children.toArray(this.props.children);
+		const selected = children.find(o => o.props.value === this.props.value);
+		return selected || children[0];
+	}
+
+	render() {
+		const selectedOption = this.getSelectedOption();
+		const content = selectedOption && selectedOption.props.children;
+
+		return (
+			<div className={Select.styles.container} onClick={this.onClick}>
+				<Rect appearance={this.props.appearance}
+					dim={this.props.disabled}
+					interactive>
+					<div className={Select.styles.select}>
+						<div className={Select.styles.label}>
+							{content}
+						</div>
+					</div>
+				</Rect>
+				<select className={Select.styles.control}
+					ref={$ => this.$select = $}
+					value={this.props.value}
+					onChange={this.props.onChange}>
+					{this.props.children}
+				</select>
+			</div>
+		);
+	}
+
+	static styles = StyleSheet.create({
+		container: {
+			position: 'relative',
+			pointerEvents: 'auto',
+		},
+		select: {
+			padding: '6px 10px',
+		},
+		label: {
+			paddingRight: 18,
+			background: '100% 55%/10px 6px no-repeat',
+			backgroundImage: `url(${SelectArrow})`,
+		},
+		control: {
+			position: 'absolute',
+			top: 2, left: 14,
+			visibility: 'hidden',
+		},
+	});
 
 }

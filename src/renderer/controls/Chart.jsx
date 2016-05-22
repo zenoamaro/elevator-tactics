@@ -3,6 +3,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import Look, {StyleSheet} from 'react-look';
 import Component from './Component';
+import Rect from './Rect';
 import map from 'lodash/map';
 import takeRight from 'lodash/takeRight';
 import max from 'lodash/max';
@@ -39,9 +40,9 @@ export default class Chart extends Component {
 	}
 
 	calculateSize(done) {
-		const $area = ReactDOM.findDOMNode(this.refs.area);
+		const $area = ReactDOM.findDOMNode(this.$area);
 		const subdivisions = this.props.subdivisions || 1;
-		const {width, height} = $area.getBoundingClientRect();
+		const [width, height] = [$area.clientWidth, $area.clientHeight];
 		const dataPointWidth = width / subdivisions;
 		this.setState({width, height, dataPointWidth}, done);
 	}
@@ -64,10 +65,12 @@ export default class Chart extends Component {
 				<div className={Chart.styles.title}>
 					{this.props.title}
 				</div>
-				<div className={Chart.styles.content} ref="area">
-					{this.renderGuide(this.state.avgValue)}
-					{this.renderGuide(this.state.maxValue)}
-					{this.renderDataPoints(this.state.values)}
+				<div className={Chart.styles.content}>
+					<Rect appearance="raised" ref={$ => this.$area = $}>
+						{this.renderGuide(this.state.avgValue)}
+						{this.renderGuide(this.state.maxValue)}
+						{this.renderDataPoints(this.state.values)}
+					</Rect>
 				</div>
 			</div>
 		);

@@ -192,7 +192,7 @@
 		// Disallow var redeclaration
 		"no-redeclare": "error",
 		// Disallow assignment operators in return statements
-		"no-return-assign": "error",
+		"no-return-assign": "off",
 		// Disallow javascript: urls
 		"no-script-url": "error",
 		// Disallow assignments where both sides are exactly the same
@@ -305,7 +305,9 @@
 		// Enforce consistent spacing inside single-line blocks
 		"block-spacing": ["error", "always"],
 		// Enforce consistent brace style for blocks
-		"brace-style": ["error", "1tbs"],
+		"brace-style": ["error", "1tbs", {
+			"allowSingleLine": true
+		}],
 		// Enforce camelcase naming convention
 		"camelcase": "error",
 		// Enforce consistent spacing before and after commas
@@ -650,7 +652,7 @@
 		"react/jsx-max-props-per-line": ["off"],
 		// Prevent usage of .bind() and arrow functions in JSX props
 		"react/jsx-no-bind": ["error", {
-			"ignoreRefs": false,
+			"ignoreRefs": true,
 			"allowArrowFunctions": false,
 			"allowBind": false,
 		}],

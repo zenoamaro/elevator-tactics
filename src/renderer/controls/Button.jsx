@@ -2,12 +2,14 @@
 import React from 'react';
 import Look, {StyleSheet} from 'react-look';
 import Component from './Component';
+import Rect from './Rect';
 
 
 @Look
 export default class Button extends Component {
 
 	static propTypes = {
+		appearance: React.PropTypes.string,
 		children: React.PropTypes.node,
 		disabled: React.PropTypes.bool,
 		onClick: React.PropTypes.func,
@@ -18,6 +20,7 @@ export default class Button extends Component {
 	};
 
 	static defaultProps = {
+		appearance: 'raised',
 		disabled: false,
 		pressed: false,
 	};
@@ -29,42 +32,33 @@ export default class Button extends Component {
 				styles={this.props.style}
 				title={this.props.title}
 				value={this.props.value}>
-				{this.props.children}
+				<Rect appearance={this.props.appearance}
+					active={this.props.pressed}
+					dim={this.props.disabled}
+					interactive>
+					<div className={Button.styles.content}>
+						{this.props.children}
+					</div>
+				</Rect>
 			</button>
 		);
 	}
 
 	static styles = StyleSheet.create({
 		button: {
-			margin: '0',
-			padding: '6px 10px',
-			color: 'black',
+			margin: 0,
+			padding: 0,
+			color: 'inherit',
 			fontSize: 'inherit',
 			fontWeight: 'inherit',
 			fontFamily: 'inherit',
-			lineHeight: '1',
-			borderRadius: '0',
-			border: 'solid 2px black',
-			background: 'white',
-			boxShadow: '2px 2px 0 black',
 			appearance: 'none',
+			background: 'transparent',
+			border: 'none',
 			pointerEvents: 'auto',
-			'disabled=false': {
-				':active': {
-					boxShadow: 'none',
-					transform: 'translate(2px, 2px)',
-				},
-				'pressed=true': {
-					boxShadow: 'none',
-					transform: 'translate(2px, 2px)',
-				},
-			},
-			'disabled=true': {
-				color: '#555555',
-				borderColor: '#555555',
-				boxShadow: '2px 2px 0 #555555',
-				pointerEvents: 'none',
-			},
+		},
+		content: {
+			padding: '6px 10px',
 		},
 	});
 

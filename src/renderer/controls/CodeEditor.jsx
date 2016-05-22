@@ -1,11 +1,13 @@
 /* @flow weak */
 import React from 'react';
+import Look, {StyleSheet} from 'react-look';
 import Component from './Component';
 import Codemirror from 'react-codemirror';
 require('codemirror/mode/javascript/javascript');
 require('codemirror/lib/codemirror.css');
 
 
+@Look
 export default class CodeEditor extends Component {
 
 	static propTypes = {
@@ -29,12 +31,22 @@ export default class CodeEditor extends Component {
 
 	render() {
 		return (
-			<Codemirror
-				onChange={this.props.onChange}
-				value={this.props.value}
-				options={this.getOptions()}
-			/>
+			<div className={CodeEditor.styles.editor}>
+				<Codemirror
+					onChange={this.props.onChange}
+					value={this.props.value}
+					options={this.getOptions()}
+				/>
+			</div>
 		);
 	}
+
+	static styles = StyleSheet.create({
+		editor: {
+			flex: 1,
+			alignSelf: 'stretch',
+			pointerEvents: 'auto',
+		},
+	});
 
 }
