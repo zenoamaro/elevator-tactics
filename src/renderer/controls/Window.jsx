@@ -1,6 +1,7 @@
 /* @flow weak */
 import React from 'react';
 import Look, {StyleSheet} from 'react-look';
+import Draggable from 'react-draggable';
 import Component from './Component';
 import TitlebarBackground from './WindowTitlebar.png';
 
@@ -10,12 +11,38 @@ export default class Window extends Component {
 
 	static propTypes = {
 		children: React.PropTypes.node,
+		draggable: React.PropTypes.bool,
 		onClose: React.PropTypes.func,
 		title: React.PropTypes.string,
 	}
 
 	static defaultProps = {
+		draggable: true,
 		title: 'Window',
+	}
+
+	render() {
+		return (
+			<Draggable handle=".handle" cancel=".cancel" bounds="parent"
+				disabled={!this.props.draggable}>
+				<div className={Window.styles.window}>
+
+					<div className={`${Window.styles.titleBar} handle`}>
+						<div className={Window.styles.title}>
+							{this.props.title}
+						</div>
+						<div
+							className={`${Window.styles.close} cancel`}
+							onClick={this.props.onClose}/>
+					</div>
+
+					<div className={Window.styles.content}>
+						{this.props.children}
+					</div>
+
+				</div>
+			</Draggable>
+		);
 	}
 
 	static styles = StyleSheet.create({
@@ -71,24 +98,5 @@ export default class Window extends Component {
 
 		},
 	});
-
-	render() {
-		return (
-			<div className={Window.styles.window}>
-				<div className={Window.styles.titleBar}>
-					<div className={Window.styles.title}>
-						{this.props.title}
-					</div>
-					<div
-						className={Window.styles.close}
-						onClick={this.props.onClose}/>
-				</div>
-
-				<div className={Window.styles.content}>
-					{this.props.children}
-				</div>
-			</div>
-		);
-	}
 
 }
