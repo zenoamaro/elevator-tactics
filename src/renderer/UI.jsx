@@ -164,6 +164,7 @@ export default class UI extends Component {
 			top: 0, left: 0,
 			right: 0, bottom: 0,
 			pointerEvents: 'none',
+			zIndex: 2,
 		},
 		levelControls: {
 			position: 'absolute',
