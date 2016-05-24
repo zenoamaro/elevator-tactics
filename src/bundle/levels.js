@@ -3,8 +3,8 @@ import {date} from 'time';
 
 export default {
 
-	'level:lonely-corner': {
-		id: 'level:lonely-corner',
+	'lonely-corner': {
+		id: 'lonely-corner',
 		name: 'Lonely corner',
 		time: date(1992, 11, 1, 18, 0, 0),
 		demand: 0.25,
@@ -23,8 +23,8 @@ export default {
 		},
 	},
 
-	'level:cabinet-street': {
-		id: 'level:cabinet-street',
+	'cabinet-street': {
+		id: 'cabinet-street',
 		name: 'Cabinet str.',
 		time: date(2009, 6, 1, 9, 30, 0),
 		demand: 0.25,
@@ -47,8 +47,8 @@ export default {
 		},
 	},
 
-	'level:sky-village': {
-		id: 'level:sky-village',
+	'sky-village': {
+		id: 'sky-village',
 		name: 'Sky Village',
 		time: date(2020, 2, 8, 3, 30, 0),
 		demand: 0.25,

@@ -97,17 +97,7 @@ body {
 	align-items: center;
 	height: 80px;
 	padding: 15px 20px;
-	background: linear-gradient(
-		to top,
-		#AAAAAA 8px,
-		#555555 8px,
-		#555555 32px,
-		#FFFF55 32px,
-		#FFFF55 34px,
-		white 34px,
-		white 36px,
-		#5555FF 36px
-	);
+	background: #555555;
 }
 .floor-label {
 	position: relative;

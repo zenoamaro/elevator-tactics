@@ -31,7 +31,7 @@ export function getRequestedFloors(world) {
 }
 
 export function makeFloorSafe(floor) {
-	return pick(floor, ['id', 'label', 'elevation']);
+	return pick(floor, ['id', 'label', 'elevation', 'type']);
 }
 
 export function getFloorAtElevation(world, elevation) {

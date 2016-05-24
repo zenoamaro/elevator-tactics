@@ -1,10 +1,13 @@
 /* @flow weak */
-import min from 'lodash/min';
-import mapValues from 'lodash/mapValues';
-import reduce from 'lodash/reduce';
+import filter from 'lodash/filter';
 import head from 'lodash/head';
-import tail from 'lodash/tail';
+import inRange from 'lodash/inRange';
 import last from 'lodash/last';
+import mapValues from 'lodash/mapValues';
+import min from 'lodash/min';
+import reduce from 'lodash/reduce';
+import sample from 'lodash/sample';
+import tail from 'lodash/tail';
 import takeRight from 'lodash/takeRight';
 import systems from 'systems';
 import {toWorldTime} from 'time';
@@ -18,6 +21,7 @@ import {makeFloorSafe} from 'floors';
 import {pluck} from 'utils';
 import {mapObj} from 'utils';
 import {levels} from 'bundle';
+import {floorTypes} from 'bundle';
 
 const MAX_HISTORY = 1000;
 
@@ -25,10 +29,17 @@ const MAX_HISTORY = 1000;
 export default function createGame(options) {
 	const level = levels[options.level];
 
-	const floors = mapValues(level.floors, floor => ({
-		...floor,
-		people: [],
-	}));
+	const floors = mapValues(level.floors, floor => {
+		const floorType = sample(filter(floorTypes,
+			floorType => inRange(floor.elevation, ...floorType.range)
+		));
+
+		return {
+			...floor,
+			type: floorType.id,
+			people: [],
+		};
+	});
 
 	const elevator = {
 		...level.elevator,

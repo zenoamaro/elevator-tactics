@@ -8,9 +8,16 @@ import pick from 'lodash/pick';
 import size from 'lodash/size';
 import reverse from 'lodash/reverse';
 import sortBy from 'lodash/sortBy';
+import {floorTypes} from 'bundle';
 
 
 export default class Floor extends Component {
+
+	static propTypes = {
+		floor: React.PropTypes.object.isRequired,
+		floors: React.PropTypes.object.isRequired,
+		people: React.PropTypes.object.isRequired,
+	};
 
 	static contextTypes = {
 		entityHover: React.PropTypes.func.isRequired,
@@ -34,8 +41,14 @@ export default class Floor extends Component {
 		const sortedPeople = reverse(sortBy(floorPeople, 'since'));
 		const isRequested = size(floorPeople) > 0;
 		const labelClass = isRequested? 'requested' : '';
+		const floorType = floorTypes[floor.type];
+		const floorStyles = {
+			background: `linear-gradient(to top, ${floorType.background})`,
+		};
+
 		return (
 			<div className={`floor ${labelClass}`}
+				style={floorStyles}
 				onMouseEnter={this.onMouseEnter}
 				onMouseLeave={this.onMouseLeave}>
 
