@@ -2,7 +2,7 @@ export default {
 
 	lobby: {
 		id: 'lobby',
-		tileset: 'offices',
+		tileset: null,
 		range: [0, 1],
 		background: `
 			#AAAAAA 8px,
@@ -10,15 +10,15 @@ export default {
 			#555555 32px,
 			#FFFF55 32px,
 			#FFFF55 34px,
-			white 34px,
-			white 36px,
+			#FFFFFF 34px,
+			#FFFFFF 36px,
 			#AA0000 36px
 		`,
 	},
 
 	offices: {
 		id: 'offices',
-		tileset: 'offices',
+		tileset: null,
 		range: [5, Infinity],
 		background: `
 			#AAAAAA 8px,
@@ -26,41 +26,31 @@ export default {
 			#555555 32px,
 			#FFFF55 32px,
 			#FFFF55 34px,
-			white 34px,
-			white 36px,
+			#FFFFFF 34px,
+			#FFFFFF 36px,
 			#5555FF 36px
 		`,
 	},
 
 	residential: {
 		id: 'residential',
-		tileset: 'offices',
+		tileset: 'residential',
 		range: [1, Infinity],
-		background: `
-			#AAAAAA 8px,
-			#555555 8px,
-			#555555 32px,
-			#FFFF55 32px,
-			#FFFF55 34px,
-			white 34px,
-			white 36px,
-			#AA5500 36px
-		`,
 	},
 
 	'underground-parking': {
 		id: 'undergroundParking',
-		tileset: 'offices',
+		tileset: null,
 		range: [-Infinity, 0],
 		background: `
 			#AAAAAA 8px,
 			#555555 8px,
 			#555555 32px,
-			#FFFF55 32px,
-			#FFFF55 34px,
-			white 34px,
-			white 36px,
-			#5555FF 36px
+			#AAAAAA 32px,
+			#AAAAAA 34px,
+			#FFFFFF 34px,
+			#FFFFFF 36px,
+			#AA5500 36px
 		`,
 	},
 

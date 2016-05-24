@@ -495,8 +495,9 @@
 		// Disallow reassigning class members
 		"no-class-assign": "error",
 		// Disallow arrow functions where they could be confused with comparisons
-		"no-confusing-arrow": ["error", {
-			"allowParens": false
+    // NOTE: Disabled because of false positives
+		"no-confusing-arrow": ["off", {
+			"allowParens": true
 		}],
 		// Disallow reassigning const variables
 		"no-const-assign": "error",

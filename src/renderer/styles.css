@@ -91,17 +91,32 @@ body {
 }
 
 .floor {
+	position: relative;
 	display: flex;
 	flex-direction: row;
 	justify-content: flex-end;
 	align-items: center;
 	height: 80px;
 	padding: 15px 20px;
+}
+.floor-background {
+	position: absolute;
+	top: 0; left: 0;
+	right: 0; bottom: 0;
 	background: #555555;
+	overflow: hidden;
+}
+.floor-background-gradient {
+}
+.floor-background-tiles {
+	display: flex;
+	flex-direction: row;
+}
+.floor-background-tiles-tile {
 }
 .floor-label {
 	position: relative;
-	top: 5px;
+	top: -18px;
 	right: -8px;
 	padding: 2px 8px;
 	margin-left: 24px;
