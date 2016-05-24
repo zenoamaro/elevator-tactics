@@ -5,8 +5,10 @@ import Component from './controls/Component';
 import TransitionGroup from 'react/lib/ReactCSSTransitionGroup';
 import Person from './Person';
 import map from 'lodash/map';
+import flatMap from 'lodash/flatMap';
 import pick from 'lodash/pick';
 import size from 'lodash/size';
+import times from 'lodash/times';
 import reverse from 'lodash/reverse';
 import sortBy from 'lodash/sortBy';
 import sample from 'lodash/sample';
@@ -70,12 +72,17 @@ export default class Floor extends Component {
 		const tileset = this.getFloorTileset();
 		if (!tileset) return;
 
+		const weightedTiles = flatMap(
+			tileset.tiles,
+			tile => times(tile.f, () => tile)
+		);
+
 		const {width} = this.getFloorSize();
 		const tiles = [];
 
 		let covered = 0;
 		while (covered < width) {
-			const tile = sample(tileset.tiles);
+			const tile = sample(weightedTiles);
 			tiles.push(tile.id);
 			covered += tile.w;
 		}
