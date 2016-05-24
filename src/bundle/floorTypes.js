@@ -38,19 +38,19 @@ export default {
 		range: [1, Infinity],
 	},
 
-	'underground-parking': {
-		id: 'undergroundParking',
+	'underground': {
+		id: 'underground',
 		tileset: null,
 		range: [-Infinity, 0],
 		background: `
 			#AAAAAA 8px,
 			#555555 8px,
 			#555555 32px,
-			#AAAAAA 32px,
-			#AAAAAA 34px,
-			#FFFFFF 34px,
-			#FFFFFF 36px,
-			#AA5500 36px
+			#00AAAA 32px,
+			#00AAAA 34px,
+			#00AAAA 34px,
+			#00AAAA 36px,
+			#000000 36px
 		`,
 	},
 

@@ -49,7 +49,7 @@ body {
 }
 
 .land {
-	min-height: 80px;
+	min-height: 600px;
 	min-width: 1200px;
 	background: #AA5500;
 }
@@ -58,8 +58,8 @@ body {
 	position: 'relative';
 	display: flex;
 	flex-direction: row;
-	padding: 16px 16px 0 16px;
-	background: #AAAAAA;
+	border: solid 16px #AAAAAA;
+	border-bottom: none;
 	z-index: 2;
 }
 
@@ -86,7 +86,7 @@ body {
 	width: 800px;
 	display: flex;
 	flex-direction: column;
-	justify-content: center;
+	justify-content: flex-start;;
 	align-items: stretch;
 }
 
@@ -96,6 +96,7 @@ body {
 	flex-direction: row;
 	justify-content: flex-end;
 	align-items: center;
+	flex: 0 0 auto;
 	height: 80px;
 	padding: 15px 20px;
 }

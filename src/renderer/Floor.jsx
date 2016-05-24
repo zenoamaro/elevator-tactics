@@ -7,9 +7,11 @@ import Person from './Person';
 import map from 'lodash/map';
 import flatMap from 'lodash/flatMap';
 import pick from 'lodash/pick';
+import head from 'lodash/head';
 import size from 'lodash/size';
 import times from 'lodash/times';
 import reverse from 'lodash/reverse';
+import filter from 'lodash/filter';
 import sortBy from 'lodash/sortBy';
 import sample from 'lodash/sample';
 import {floorTypes} from 'bundle';
@@ -35,6 +37,12 @@ export default class Floor extends Component {
 
 	componentDidMount() {
 		this.createTiles();
+	}
+
+	getFloorDistance() {
+		const {floor, floors} = this.props;
+		const above = filter(floors, f => f.elevation > floor.elevation);
+		return above.length? head(above).elevation - floor.elevation - 1 : 0;
 	}
 
 	getFloorSize() {
@@ -105,11 +113,15 @@ export default class Floor extends Component {
 		const labelClass = this.isFloorRequested()
 			? 'requested'
 			: '';
+		const style = {
+			marginTop: this.getFloorDistance() * 80,
+		};
 
 		return (
 			<div className={`floor ${labelClass}`}
 				onMouseEnter={this.onMouseEnter}
-				onMouseLeave={this.onMouseLeave}>
+				onMouseLeave={this.onMouseLeave}
+				style={style}>
 				{this.renderBackground()}
 				{this.renderPeople()}
 				{this.renderLabel()}

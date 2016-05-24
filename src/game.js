@@ -43,7 +43,7 @@ export default function createGame(options) {
 
 	const elevator = {
 		...level.elevator,
-		elevation: min(pluck(floors, 'elevation')),
+		elevation: 0,
 		people: [],
 		open: false,
 	};
