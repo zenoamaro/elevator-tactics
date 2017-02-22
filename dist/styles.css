@@ -49,7 +49,7 @@ body {
 }
 
 .land {
-	min-height: 80px;
+	min-height: 600px;
 	min-width: 1200px;
 	background: #AA5500;
 }
@@ -58,8 +58,8 @@ body {
 	position: 'relative';
 	display: flex;
 	flex-direction: row;
-	padding: 16px 16px 0 16px;
-	background: #AAAAAA;
+	border: solid 16px #AAAAAA;
+	border-bottom: none;
 	z-index: 2;
 }
 
@@ -86,32 +86,38 @@ body {
 	width: 800px;
 	display: flex;
 	flex-direction: column;
-	justify-content: center;
+	justify-content: flex-start;;
 	align-items: stretch;
 }
 
 .floor {
+	position: relative;
 	display: flex;
 	flex-direction: row;
 	justify-content: flex-end;
 	align-items: center;
+	flex: 0 0 auto;
 	height: 80px;
 	padding: 15px 20px;
-	background: linear-gradient(
-		to top,
-		#AAAAAA 8px,
-		#555555 8px,
-		#555555 32px,
-		#FFFF55 32px,
-		#FFFF55 34px,
-		white 34px,
-		white 36px,
-		#5555FF 36px
-	);
+}
+.floor-background {
+	position: absolute;
+	top: 0; left: 0;
+	right: 0; bottom: 0;
+	background: #555555;
+	overflow: hidden;
+}
+.floor-background-gradient {
+}
+.floor-background-tiles {
+	display: flex;
+	flex-direction: row;
+}
+.floor-background-tiles-tile {
 }
 .floor-label {
 	position: relative;
-	top: 5px;
+	top: -18px;
 	right: -8px;
 	padding: 2px 8px;
 	margin-left: 24px;
