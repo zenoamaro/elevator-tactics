@@ -32,26 +32,26 @@ module.exports = {
 		loaders: [{
 			test: /\.jsx?$/,
 			include: d('src'),
-			loaders: ['babel'],
+			loaders: ['babel-loader'],
 		}, {
 			test: /\.json$/,
-			loaders: ['json'],
+			loaders: ['json-loader'],
 		}, {
 			test: /\.(html|css|png|ttf)$/,
 			include: d('src/renderer'),
 			loaders: [
-				'file?context=./src/renderer&name=[name].[ext]?[hash:10]',
+				'file-loader?context=./src/renderer&name=[name].[ext]?[hash:10]',
 			],
 		}, {
 			test: /\.(html|css|ttf|png)$/,
 			include: d('src/bundle'),
 			loaders: [
-				'file?context=./src/bundle&name=[path][name].[ext]?[hash:10]',
+				'file-loader?context=./src/bundle&name=[path][name].[ext]?[hash:10]',
 			],
 		}, {
 			test: /\.css$/,
 			include: d('node_modules/codemirror'),
-			loaders: ['file?name=[name].[ext]?[hash:10]'],
+			loaders: ['file-loader?name=[name].[ext]?[hash:10]'],
 		}]
 	},
 
@@ -78,7 +78,7 @@ module.exports = {
 	},
 
 	plugins: [
-		new webpack.NoErrorsPlugin(),
+		new webpack.NoEmitOnErrorsPlugin(),
 		new webpack.EnvironmentPlugin(['NODE_ENV']),
 		new webpack.LoaderOptionsPlugin({
 			debug: development,
@@ -90,7 +90,6 @@ module.exports = {
 			'onBuildStart': "open 'http://localhost:8080'",
 		}),
 	] : [
-		new webpack.optimize.DedupePlugin(),
 		new webpack.optimize.UglifyJsPlugin({
 			comments: /\/\/#/, // Keep only source maps
 			compress: { warnings: false },
