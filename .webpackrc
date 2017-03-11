@@ -74,7 +74,7 @@ module.exports = {
 		filename: '[name].js',
 		publicPath: development
 			? 'http://localhost:8080/'
-			: '/',
+			: '',
 	},
 
 	plugins: [
@@ -86,9 +86,6 @@ module.exports = {
 		}),
 	].concat(development? [
 		new webpack.HotModuleReplacementPlugin(),
-		new WebpackShellPlugin({
-			'onBuildStart': "open 'http://localhost:8080'",
-		}),
 	] : [
 		new webpack.optimize.UglifyJsPlugin({
 			comments: /\/\/#/, // Keep only source maps
