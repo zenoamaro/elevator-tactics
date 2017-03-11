@@ -11,6 +11,7 @@ import Window from './controls/Window';
 import map from 'lodash/map';
 import size from 'lodash/size';
 import {prettyJson} from 'utils';
+import builtInStrategies from '../bundle/strategies';
 
 
 @Look
@@ -23,29 +24,35 @@ export default class StrategyEditor extends Component {
 		strategy: React.PropTypes.string,
 	};
 
-	componentWillMount() {
-		const {strategy} = this.props;
-		this.setState({strategy});
+	state = {
+		name: 'No strategy',
 	}
 
 	fetchStrategies() {
-		return JSON.parse(localStorage.savedStrategies || '{}');
+		return {
+			...JSON.parse(localStorage.savedStrategies || '{}'),
+			...builtInStrategies,
+		};
 	}
 
 	updateStrategy(strategy) {
 		const savedStrategies = this.fetchStrategies();
-		savedStrategies[strategy.name] = strategy;
+		savedStrategies[strategy.id] = strategy;
 		localStorage.savedStrategies = JSON.stringify(savedStrategies);
-		this.setState({strategyName: strategy.name});
+		this.setState({
+			strategyId: strategy.id,
+			strategyName: strategy.name,
+		});
 	}
 
 	loadStrategy = (event) => {
-		const name = event.target.value;
-		const strategy = this.fetchStrategies()[name];
+		const id = event.target.value;
+		const strategy = this.fetchStrategies()[id];
 		this.setState({
-			strategy:strategy.strategy,
+			strategyId: id,
 			strategyName: strategy.name,
 		});
+		this.change(strategy.strategy);
 	};
 
 	saveStrategy = () => {
@@ -55,17 +62,16 @@ export default class StrategyEditor extends Component {
 		).trim();
 
 		if (name) {
-			this.updateStrategy({name, strategy: this.state.strategy});
+			this.updateStrategy({
+				name,
+				id: `user:${name}`,
+				strategy: this.props.strategy,
+			});
 		}
 	};
 
 	change = (strategy) => {
-		this.setState({strategy});
-	};
-
-	submitStrategy = () => {
 		if (this.props.onSubmit) {
-			const {strategy} = this.state;
 			this.props.onSubmit(strategy);
 		}
 	};
@@ -78,33 +84,24 @@ export default class StrategyEditor extends Component {
 				<Toolbar>
 					<Layout dir="horizontal">
 						<Select appearance="transparent"
-							value={this.state.strategyName||'load'}
+							label={this.state.strategyName || 'Load strategy'}
+							value={this.state.strategyId || 'load'}
 							onChange={this.loadStrategy}>
 							<option disabled value="load">Pick a strategy to load</option>
-
-							{size(strategies)
-								? map(strategies, this.renderSavedStrategy)
-								: <option disabled value="empty">No saved strategies</option>
-							}
+							<option disabled>–––––––––––––––––––––</option>
+							{map(strategies, this.renderStrategyEntry)}
 						</Select>
 						<Button appearance="transparent"
 							onClick={this.saveStrategy}>
 							Save strategy
 						</Button>
 					</Layout>
-
-					<div>
-						<Button appearance="transparent"
-							onClick={this.submitStrategy}>
-							Use this strategy
-						</Button>
-					</div>
 				</Toolbar>
 
 				<div className={StrategyEditor.styles.content}>
 					<Layout dir="horizontal">
 						<CodeEditor
-							value={this.state.strategy}
+							value={this.props.strategy}
 							onChange={this.change}
 						/>
 						<pre className={StrategyEditor.styles.inspector}>
@@ -116,10 +113,10 @@ export default class StrategyEditor extends Component {
 		);
 	}
 
-	renderSavedStrategy = (strategy) => (
+	renderStrategyEntry = (strategy) => (
 		<option
-			key={strategy.name}
-			value={strategy.name}>
+			key={strategy.id}
+			value={strategy.id}>
 			{strategy.name}
 		</option>
 	)

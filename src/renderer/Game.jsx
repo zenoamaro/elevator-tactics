@@ -93,8 +93,12 @@ export default class Game extends Component {
 
 	tick = (done) => {
 		const {strategy} = this.state;
-		const game = tick(this.state.game, strategy);
-		this.setState({game}, done);
+		try {
+			const game = tick(this.state.game, strategy);
+			this.setState({game}, done);
+		} catch (err) {
+			this.changeSpeed('paused');
+		}
 	};
 
 	reset = (done) => {

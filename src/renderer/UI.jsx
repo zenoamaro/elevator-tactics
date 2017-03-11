@@ -64,7 +64,6 @@ export default class UI extends Component {
 	};
 
 	changeStrategy = (strategy) => {
-		this.closeStrategyEditor();
 		this.context.changeStrategy(strategy);
 	};
 

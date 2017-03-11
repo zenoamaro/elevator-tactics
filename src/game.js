@@ -18,12 +18,11 @@ import {getElevatorPeople} from 'elevators';
 import {getFloorAtElevation} from 'floors';
 import {getRequestedFloors} from 'floors';
 import {makeFloorSafe} from 'floors';
-import {pluck} from 'utils';
 import {mapObj} from 'utils';
 import {levels} from 'bundle';
 import {floorTypes} from 'bundle';
 
-const MAX_HISTORY = 1000;
+const MAX_HISTORY = 100;
 
 
 export default function createGame(options) {
