@@ -13,7 +13,7 @@ export function epochToTime(epoch, baseTime) {
 
 export function formatTime(t) {
 	const date = t.toLocaleDateString();
-	const time = t.toLocaleTimeString().slice(0, 5);
+	const time = t.toLocaleTimeString().split(':').slice(0, 2).join(':');
 	return `${date} — ${time}`;
 }
 
